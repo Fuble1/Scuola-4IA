@@ -1,13 +1,13 @@
 /*
     Realizzare un programma che inizializza una matrice 5x5 di interi quindi esegue le seguenti funzioni:
-   x- Caricamento dei valori nella matrice random con valori compresi tra 5 e 25.
-   x- Stampa della matrice per righe.
-   x- Stampa della matrice per colonne.
-   x- Calcolo della media della matrice.
-   x- Calcolo del totale di una riga della matrice (riga indicata per indice).
-   - Ricerca della riga con media maggiore.
-   - Ricerca di un vettore di 5 elementi interi all'interno della matrice.
-   */
+    x- Caricamento dei valori nella matrice random con valori compresi tra 5 e 25.
+    x- Stampa della matrice per righe.
+    x- Stampa della matrice per colonne.
+    x- Calcolo della media della matrice.
+    x- Calcolo del totale di una riga della matrice (riga indicata per indice).
+    - Ricerca della riga con media maggiore.
+    - Ricerca di un vettore di 5 elementi interi all'interno della matrice.
+*/
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -62,7 +62,7 @@ float mediaMatrice(int [][DIM], int, int);
 int totaleRigaMatrice(int [][DIM], int, int, int);
 
 
-// MAIN PROGRAM
+// main
 int main(){
     int m[DIM][DIM];
     int sommaRiga;
@@ -77,6 +77,7 @@ int main(){
     sommaRiga = totaleRigaMatrice(m, DIM, DIM, 6);
     if(sommaRiga != -1)
         printf("Somma della riga 4: %d", sommaRiga);
+
     return(0);
 }
 
@@ -91,6 +92,7 @@ void initMatrice(int _m[][DIM], int _r, int _c, int _min, int _max){
         }
     }
 }
+
 void stampaMatrice(int _m[][DIM], int _r, int _c){
     int i, j;
     for(i=0; i<_r; i++){
@@ -100,6 +102,7 @@ void stampaMatrice(int _m[][DIM], int _r, int _c){
         printf("\n");
     }
 }
+
 void stampaPerColonne(int _m[][DIM], int _r, int _c){
     int i,j;
     for(i=0; i<_r; i++){
@@ -109,6 +112,7 @@ void stampaPerColonne(int _m[][DIM], int _r, int _c){
         printf("\n");
     }
 }
+
 float mediaMatrice(int _m[][DIM], int _r, int _c){
     int somma;
     int i,j;
@@ -119,9 +123,9 @@ float mediaMatrice(int _m[][DIM], int _r, int _c){
             somma = somma + _m[i][j];
         }
     }
-
     return((float)somma/(_r*_c));
 }
+
 int totaleRigaMatrice(int _m[][DIM], int _r, int _c, int _index){
     int somma;
     int i, j;
