@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <title>B&B Gigi il Montanaro</title>
+        <style>
+            body{
+                background-color: rgb(218, 218, 218);
+            }
+            .navbar-brand{;
+                color: white;
+                font-size: 22px;
+            }
+            #hometext{
+                margin-top: 1%;
+                font-size: 1.01em;
+                text-align: justify;
+            }
+            #navbarFont{
+                font-size: 16px;
+            }
+            .carousel-inner{
+                margin-top: 1%;
+                width:1300px;
+                height:790px;
+            }
+            h1{
+                font-weight: 400;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <div class="container text-left">
+            <div class="row">
+                <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #A9A9A9;">
+                    <div class="container-fluid">
+                        <a class="navbar-brand">B&B Gigi il Montanaro</a>
+                        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                            <li class="nav-item" id="navbarFont">
+                                <a class="nav-link" aria-current="page" href="b&b.html">Home</a>
+                            </li>
+                            <li class="nav-item" id="navbarFont">
+                                <a class="nav-link" href="chisiamo.html">Chi siamo</a>
+                            </li>
+                            <li class="nav-item" id="navbarFont">
+                                <a class="nav-link" href="dove.html">Dove</a>
+                            </li>
+                            <li class="nav-item" id="navbarFont">
+                                <a class="nav-link" href="offerte.html">Le nostre offerte</a>
+                            </li>
+                            <li class="nav-item" id="navbarFont">
+                                <a class="nav-link" href="contatti.html">Contattaci</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="col" id="hometext">
+                    <h1>Le nostre camere</h1>
+                    <div id="carouselCamera" class="carousel slide" data-bs-ride="true">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselCamera" data-bs-slide-to="0" aria-label="Slide 1" class="active" aria-current="true"></button>
+                            <button type="button" data-bs-target="#carouselCamera" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselCamera" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#carouselCamera" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                            <button type="button" data-bs-target="#carouselCamera" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-bs-interval="9000">
+                                <img src="camera.jpg" class="d-block w-100" alt="camera">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="7000">
+                                <img src="bagno.jpg" class="d-block w-100" alt="bagno">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="7000">
+                                <img src="salotto.jpg" class="d-block w-100" alt="salotto">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="7000">
+                                <img src="fuori.jpg" class="d-block w-100" alt="fuori">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="7000">
+                                <img src="colazione.jpg" class="d-block w-100" alt="colazione">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselCamera" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselCamera" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  </body>
+</html>
