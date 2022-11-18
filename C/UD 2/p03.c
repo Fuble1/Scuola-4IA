@@ -1,9 +1,9 @@
 /*
 Realizzare un programma per la gestione di una stringa inserita da tastiera (stringa allocata massimo 100byte), utilizzando un puntatore a stringa.
 
- initStringa() Richiede l'input di una stringa da tastiera.
- comparaStringhe() Compara due stringhe alfabeticamente, -1 se str1 precede str2; 0 se le stringhe sono uguali; +1 se str1 segue str2.
- trovaDoppie() Comunica quante doppie sono presenti nella stringa. (otto -> 1 doppia; cassetto -> 2 doppie; xxx -> 2 doppie).
+    x-initStringa() Richiede l'input di una stringa da tastiera.
+    x-comparaStringhe() Compara due stringhe alfabeticamente, -1 se str1 precede str2; 0 se le stringhe sono uguali; +1 se str1 segue str2.
+    x-trovaDoppie() Comunica quante doppie sono presenti nella stringa. (otto -> 1 doppia; cassetto -> 2 doppie; xxx -> 2 doppie).
 */
 
 #include <stdio.h>
@@ -16,6 +16,7 @@ Realizzare un programma per la gestione di una stringa inserita da tastiera (str
  * @param char* Riferimento alla stringa da utilizzare.
 */
 void initStringa(char*);
+
 /**
  * Funzione che compara alfabeticamente due stringhe.
  * @param char* Riferimento stringa 1
@@ -24,7 +25,9 @@ void initStringa(char*);
 */
 int comparaStringhe(char*, char*);
 
-// main
+int trovaDoppie(char*);
+
+// MAIN
 int main(){
     char *s1;
     char *s2;
@@ -37,10 +40,11 @@ int main(){
     
     printf("\n");
     printf("Comparazione: %d", comparaStringhe(s1,s2));
-
+    printf("\n\n");
+    printf("Doppie trovate in %s: %d", s1, trovaDoppie(s1));
     return(0);
 }
-
+// FUNZIONI
 void initStringa(char *_str){
     printf("Inserisci una stringa: ");
     scanf("%s", _str);
@@ -65,4 +69,18 @@ int comparaStringhe(char *_str1, char *_str2){
         if(*(_str2+i)!='\0')
             return(0);
     }
+}
+
+int trovaDoppie(char *_str){
+    int i;
+    int cnt;
+
+    i = 0;
+    cnt = 0;
+    while(*(_str+i) != '\0'){
+        if(*(_str+i) == *(_str+i+1))
+            cnt = cnt + 1;
+        i++;
+    }
+    return(cnt);
 }
