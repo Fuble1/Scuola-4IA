@@ -22,7 +22,7 @@ typedef struct{
     int anno;
 }Studente;
 
-// prototipi delle funzioni
+// prototipi funzioni
 /**
  * Aggiunge uno studente al vettore di elenco
  * @param Studente[] Vettore di strutture da usare come elenco
@@ -30,6 +30,7 @@ typedef struct{
  * @param int Numero massimo di strutture utilizzabili.
 */
 void addStudente(Studente[], int*, int);
+
 /**
  * Visualizza le strutture riempite nell'elenco
  * @param Studente[] Vettore di strutture da usare come elenco.
@@ -41,7 +42,7 @@ int main(){
     Studente elenco[MAX_ITEMS];     // vettore per le strutture allocate.
     int cntStudenti;                // contatore degli studenti inseriti.
 
-    cntStudenti = 0;                // azzero il contatore degli studenti inseriti.
+    cntStudenti = 0;                // azzeramento contatore degli studenti.
 
     // aggiungo tre studenti con 3 chiamate alla funzuione di add
     addStudente(elenco, &cntStudenti, MAX_ITEMS);
@@ -50,6 +51,7 @@ int main(){
 
     // visualizzo gli studenti inseriti chiamando la show
     showStudenti(elenco, cntStudenti);
+    
     return(0);
 }
 
