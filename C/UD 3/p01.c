@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX_CHAR 20
-#define MAX_ITEMS 10
+#define MAX_ITEMS 5
 
 // struttura definita per il programma
 typedef struct{
@@ -31,12 +31,14 @@ typedef struct{
  * @param int Numero massimo di strutture utilizzabili.
 */
 void addStudente(Studente[], int*, int);
+
 /**
  * Visualizza le strutture riempite nell'elenco
  * @param Studente[] Vettore di strutture da usare come elenco.
  * @param int Numero strutture attualmente presenti in elenco / celle utilizzate del vettore.
 */
 void showStudenti(Studente[], int);
+
 /**
  * Modifica i dati di uno studente scelto per indice
  * @param Studente[] Vettore di strutture da usare come elenco.
@@ -45,6 +47,7 @@ void showStudenti(Studente[], int);
  * @return int 1/0 se possibile la modifica oppure no.
 */
 int modifyStudente(Studente[], int, int);
+
 /**
  * Cancella uno studente scelto per indice
  * @param Studente[] Vettore di strutture da usare come elenco.
@@ -53,6 +56,7 @@ int modifyStudente(Studente[], int, int);
  * @return int 1/0 se possibile la modifica oppure no.
 */
 int deleteStudente(Studente[], int, int*);
+
 /**
  * Ricerca uno studente partendo dal cognome
  * @param Studente[] Vettore di strutture da usare come elenco.
@@ -62,12 +66,20 @@ int deleteStudente(Studente[], int, int*);
 void searchStudente(Studente[], char*, int);
 
 /**
+ * Scrittura elenco su file binario
+ * @param Studente[] Vettore con gli studenti da registrare su file
+ * @param int numero di studenti da scrivere su file
+*/
+void scriviSuFile(Studente[], int);
+
+/**
  * Funzione che compara alfabeticamente due stringhe.
  * @param char* Riferimento stringa 1
  * @param char* Riferimento stringa 2
  * @return int -1 se st1<st2; 0 se st1=st2; +1 se st1>st2
 */
 int comparaStringhe(char*, char*);
+
 // #############################
 // #       MAIN PROGRAM        #
 // #############################
@@ -83,6 +95,7 @@ int main(){
     addStudente(elenco, &cntStudenti, MAX_ITEMS);
     addStudente(elenco, &cntStudenti, MAX_ITEMS);
     addStudente(elenco, &cntStudenti, MAX_ITEMS);
+    addStudente(elenco, &cntStudenti, MAX_ITEMS);
 
     // Visualizzo gli studenti inseriti chiamando la show
     showStudenti(elenco, cntStudenti);
@@ -90,7 +103,7 @@ int main(){
     // Modifica di uno studente
     showStudenti(elenco, cntStudenti);
     printf("Inserisci nr. studente: ");
-    scanf("%d", &indexStudente, cntStudenti);
+    scanf("%d", &indexStudente);
     fflush(stdin);
     if(modifyStudente(elenco, indexStudente, cntStudenti))
         printf("Aggiornamento studente avvenuto!\n");
@@ -105,15 +118,16 @@ int main(){
     else
         printf("Indice non presente!\n");
     showStudenti(elenco, cntStudenti);
-
+    /*
     printf("\n- Ricerca studente 'Rossi' -\n");
     searchStudente(elenco, cognome, cntStudenti);
+    */
+
+    scriviSuFile(elenco, cntStudenti);
     return(0);
 }
 
-// #############################
 // #         FUNZIONI          #
-// #############################
 void addStudente(Studente x[], int *_cnt, int MAX_ITEM){
     if(*_cnt < MAX_ITEM){
         printf("Nome: ");
@@ -131,6 +145,7 @@ void addStudente(Studente x[], int *_cnt, int MAX_ITEM){
         printf("ERROR! - No Space Available!!\n");
     }
 }
+
 void showStudenti(Studente x[], int _cnt){
     int i;
     printf("--ELENCO--\n");
@@ -138,6 +153,7 @@ void showStudenti(Studente x[], int _cnt){
         printf("#%d - %s %s %d\n", (i+1), x[i].nome, x[i].cognome, x[i].anno);
     }
 }
+
 int modifyStudente(Studente x[], int _indexStudente, int _cntStudenti){
     // verifico che l'indice scelto sia effettivamente utilizzato.
     if((_indexStudente > 0) && (_indexStudente < _cntStudenti)){
@@ -155,6 +171,7 @@ int modifyStudente(Studente x[], int _indexStudente, int _cntStudenti){
     else
         return(0);
 }
+
 int deleteStudente(Studente x[], int _indexStudente, int *_cntStudenti){
     int i;
     if((_indexStudente > 0) && (_indexStudente < *_cntStudenti)){
@@ -167,6 +184,7 @@ int deleteStudente(Studente x[], int _indexStudente, int *_cntStudenti){
     else    
         return(0);
 }
+
 void searchStudente(Studente x[], char *_Cognome, int _cntStudenti){
     int i;
     for(i=0; i<_cntStudenti; i++){
@@ -175,7 +193,18 @@ void searchStudente(Studente x[], char *_Cognome, int _cntStudenti){
     }
 }
 
-// ereditate dalle stringhe
+void scriviSuFile(Studente _x[], int _cntStudenti){
+    FILE *fpOut = fopen("elenco.bin", "wb");
+    int i;
+
+    for(i=0; i<_cntStudenti; i++){
+        fwrite(&_x[i], sizeof(Studente), 1, fpOut);
+    }
+
+    fclose(fpOut);
+}
+
+// ereditate dalle stringhe //
 int comparaStringhe(char *_str1, char *_str2){
     int i;
     i=0;
