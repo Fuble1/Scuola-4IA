@@ -1,69 +1,77 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Definizione dells truttura Nodo
+// Definition of the structure Nodo.
 typedef struct nodo{
     int val;
     struct nodo *next;
 }Nodo;
 
-// Dichiarazione dei prototipi
-
+/* Declaration of prototypes */ 
 /**
- * @brief Aggiunge un nodo in testa alla lista
- * @param Nodo* Puntatore alla testa della lista.
- * @param int Valore da inserire nel nodo.
- * @return Nuova testa della lista.
+ * @brief Add a new node to the head of the list.
+ * @param Nodo* Pointer to the head.
+ * @param int Value to save.
+ * @return Return the new head of the list.
 */
 Nodo* addTesta(Nodo *, int);
 
 /**
- * @brief Visualizza una lista.
- * @param Nodo* Puntatore alla testa della lista.
+ * @brief Show all nodes of a list.
+ * @param Nodo* Pointer to the head.
 */
 void showLista(Nodo *);
 
 /**
- * @brief Visualizza una lista in modo ricorsivo
- * @param Nodo* Puntatore alla lista.
+ * @brief Show all nodes of a list with recursive function.
+ * @param Nodo* Pointer to the head.
 */
 void showListaRecursive(Nodo *);
 
 /**
- * @brief Visualizza una lista al contrario in modo ricorsivo.
- * @param Nodo* Puntatore alla lista.
+ * @brief Show a list from the tail to the head with a recursive function.
+ * @param Nodo* Pointer to the head.
 */
 void showListaReversedRecursive(Nodo *);
 
 /**
- * @brief Estrae un nodo dalla testa della lista, con controllo esistenza.
- * @param Nodo* Puntatore alla testa della lista
- * @return Nuova testa della lista.
+ * @brief Extract a node from the head of the list, check if the list exist.
+ * @param Nodo* Pointer to the head.
+ * @return New reference to the head.
 */
 Nodo* popTesta(Nodo *);
 
 /**
- * @brief Aggiunge un nodo alla coda della lista.
- * @param Nodo* Puntatore alla testa della lista.
- * @param int valore da inserire nel nodo
- * @return Nodo* Puntatore alla nuova testa.
+ * @brief Add a new node the the tail of the list.
+ * @param Nodo* Pointer to the head.
+ * @param int Value to save into the new node.
+ * @return Nodo* New reference to the head.
 */
 Nodo* pushCoda(Nodo *, int );
 
 /**
- * @brief Ricerca il valore massimo o minimo interno alla lista.
- * @param Nodo* Puntatore alla testa della lista.
- * @param int 0->Minimo; 1->Massimo
- * @return Valore trovato.
+ * @brief Search and return the min or max value, min or max selected by user with a flag as parameter.
+ * @param Nodo* Pointer to the head.
+ * @param int Flag 0->min; 1->max
+ * @return The searched value
 */
 int ricercaMaxMinLista(Nodo *, int);
 
 /**
- * @brief Determina la lunghezza di una lista.
- * @param Nodo* Puntatore alla testa della lista.
- * @return Numero di nodi che compongono la lista.
+ * @brief Count and return the number of nodes of a list.
+ * @param Nodo* Pointer to the head.
+ * @return The number of nodes of a list.
 */
 int contaNodi(Nodo*);
+
+/**
+ * @brief Add a new node into a specific position of the list.
+ * @param Nodo* Pointer to the head.
+ * @param int the selected position, check if the position exist.
+ * @param int The value to save into the list.
+ * @return Return the new head of the list.
+*/
+Nodo* pushAtPos(Nodo*, int, int);
 
 // ### MAIN PROOGRAM ###
 int main(){
@@ -80,8 +88,19 @@ int main(){
     printf("\n\n");
     showListaRecursive(t);
     printf("\n\n");
-    showListaReversedRecursive(t);
-
+    /*
+    showListaReversedRecursive(t); 
+	*/
+	t = pushAtPos(t, 1, 99); 
+	showLista(t);
+	printf("\n\n");
+	
+	t = pushAtPos(t, contaNodi(t)+1, 66);
+	showLista(t);
+	printf("\n\n");
+	
+	t = pushAtPos(t, contaNodi(t)-2, 100);
+	showLista(t);
     return(0);
 }
 
@@ -93,7 +112,6 @@ Nodo* addTesta(Nodo *_testa, int _val){
     tmp->val = _val;
     return(tmp);
 }
-
 void showLista(Nodo *_testa){
     Nodo *tmp;
     tmp = _testa;
@@ -121,7 +139,6 @@ void showListaReversedRecursive(Nodo *_tmp){
         printf("Address: %d; val: %d, next: %d\n", _tmp, _tmp->val, _tmp->next);        
     }
 }
-
 Nodo* popTesta(Nodo *_head){
 	if(_head == NULL)
 		return NULL;
@@ -184,4 +201,44 @@ int contaNodi(Nodo* _head){
 		_tmp = _tmp->next;
 	}
 	return cnt;		// ritorno numero nodi
+}
+
+Nodo* pushAtPos(Nodo* _head, int pos, int val){
+	/*
+	Nodo* nPos = malloc(sizeof(Nodo));
+	nPos->val = val;
+	nPos->next = */
+	int cnt = contaNodi(_head);
+	
+	Nodo* t;
+	t = NULL;
+	
+	if(pos == 1){
+		t = addTesta(_head, val) ;
+		return t;
+	}
+	
+	if(pos == cnt+1){
+		t = pushCoda(_head, val);
+		return t;
+	}
+	//printf("%d-", pos);
+	
+	if(pos > 1 && pos < contaNodi(_head)){	
+		//printf("entro");
+		int tmp = 1;
+		Nodo *x; 
+		x = _head;
+		Nodo *box;
+		while(tmp < pos-1){
+			x = x->next;
+			tmp++;
+		}
+		//printf("%d-", x);
+		box = malloc(sizeof(Nodo));
+		box->val = val;
+		box->next = x->next;
+		x->next = box;
+		return (_head);
+	}	
 }
